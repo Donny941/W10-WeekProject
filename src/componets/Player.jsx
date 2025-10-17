@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { HeartFill } from "react-bootstrap-icons";
 import { addFavourite, removeFavourite } from "../redux/action";
 
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
+
 function Player() {
   const dispatch = useDispatch();
   const song = useSelector((state) => state.playsong.content);
@@ -23,6 +26,7 @@ function Player() {
             <Col className="col-3">
               {song ? (
                 <div className="d-flex align-items-center">
+                  <AudioPlayer autoPlay src={song.preview} volume={0.1} className="d-none" />
                   <Image src={song.album.cover_small} alt="Now playing cover" style={{ height: "50px" }} />
 
                   <div className="ms-3 text-light" style={{ maxWidth: "200px" }}>

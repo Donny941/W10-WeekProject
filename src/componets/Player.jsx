@@ -16,8 +16,16 @@ function Player() {
   const dispatch = useDispatch();
   const song = useSelector((state) => state.playsong.content);
   const myFav = useSelector((state) => state.favourite.content);
+  //   const [fav, setFav] = useState(null);
 
-  const fav = myFav.find((favsong) => favsong.id === song.id);
+  //   if (song) {
+  //     setFav(myFav.find((favsong) => favsong.id === song.id));
+  //   }
+
+  const favControl = () => {
+    return myFav.find((favsong) => favsong.id === song.id);
+  };
+
   return (
     <Container fluid className="fixed-bottom bg-container pt-1">
       <Row className="align-items-center h-100">
@@ -27,12 +35,12 @@ function Player() {
               {song ? (
                 <div className="d-flex align-items-center">
                   <AudioPlayer autoPlay src={song.preview} volume={0.1} className="d-none" />
-                  <Image src={song.album.cover_small} alt="Now playing cover" style={{ height: "50px" }} />
+                  <Image src={song.album.cover_small} alt="Now playing cover" style={{ height: "50px" }} className="rounded" />
 
                   <div className="ms-3 text-light" style={{ maxWidth: "200px" }}>
                     <div className="text-truncate">{song.title}</div>
                     <small className="text-truncate d-inline-block">{song.artist.name}</small>
-                    {!fav ? (
+                    {!favControl() ? (
                       <HeartFill
                         onClick={() => {
                           dispatch(addFavourite(song));
@@ -63,19 +71,19 @@ function Player() {
             </Col>
             <Col className="col-6 playerControls d-flex flex-column align-items-center">
               <div className="d-flex justify-content-center gap-3">
-                <a href="#">
+                <a href="">
                   <img src={shuffle} alt="shuffle" />
                 </a>
-                <a href="#">
+                <a href="">
                   <img src={prev} alt="prev" />
                 </a>
-                <a href="#">
+                <a href="">
                   <img src={play} alt="play" />
                 </a>
-                <a href="#">
+                <a href="">
                   <img src={next} alt="next" />
                 </a>
-                <a href="#">
+                <a href="">
                   <img src={repeat} alt="repeat" />
                 </a>
               </div>

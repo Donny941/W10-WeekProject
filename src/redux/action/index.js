@@ -29,13 +29,13 @@ export const getSongAction = (url, query, category) => {
       if (response.ok) {
         let { data } = await response.json();
         console.log(data);
-        dispatch({ type: SAVE_SONG, payload: { category: category, data: data } });
-        dispatch({ type: SET_LOADING, payload: false });
+        dispatch({ type: SAVE_SONG, payload: { category, data } });
       } else {
         throw new Error("Error in fetching songs");
       }
     } catch (err) {
       dispatch(setError(err.message));
+    } finally {
       dispatch(setLoading(false));
     }
   };

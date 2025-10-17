@@ -13,6 +13,7 @@ function SongCard({ song }) {
       <Col className="text-center text-light">
         <div className="position-relative">
           <Image
+            className="rounded"
             src={song.album.cover_medium}
             alt="Placeholder album cover"
             fluid

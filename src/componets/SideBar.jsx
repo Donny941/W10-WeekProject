@@ -1,9 +1,21 @@
 import { Navbar, Nav, Container, Form, InputGroup, Button, Col, NavbarBrand, Row } from "react-bootstrap";
 import logo from "../assets/logo.png";
-import { HouseFill, List, BookFill } from "react-bootstrap-icons";
+import { HouseFill, BookFill } from "react-bootstrap-icons";
 import { Link } from "react-router";
+import { useDispatch } from "react-redux";
+import { searchQuery } from "../redux/action";
+import { useState } from "react";
 
 function SideBar() {
+  const dispatch = useDispatch();
+
+  const [localQuery, setLocalQuery] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(searchQuery(localQuery));
+  };
+
   return (
     <Col md={2}>
       <Navbar expand="md" className="navbar-dark fixed-left justify-content-between">
@@ -24,10 +36,10 @@ function SideBar() {
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
-          <Form className="mt-5">
+          <Form className="mt-5" onSubmit={handleSubmit}>
             <InputGroup>
-              <Form.Control placeholder="Search" aria-label="Search" />
-              <Button variant="outline-secondary" size="sm">
+              <Form.Control type="search" value={localQuery} onChange={(e) => setLocalQuery(e.target.value)} placeholder="Search" aria-label="Search" />
+              <Button variant="outline-secondary" size="sm" type="submit">
                 GO
               </Button>
             </InputGroup>

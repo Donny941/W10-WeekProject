@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Col, Row, Image } from "react-bootstrap";
+import { Col, Row, Image, Spinner } from "react-bootstrap";
 import { getSongAction } from "../redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import SongCard from "./SongCard";
@@ -38,6 +38,7 @@ function AlbumSection({ title, query, category }) {
   };
   const dispatch = useDispatch();
   const songs = useSelector((state) => state.search.songs[category]);
+  const isLoading = useSelector((state) => state.search.isLoading);
 
   const URL = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 
@@ -49,12 +50,17 @@ function AlbumSection({ title, query, category }) {
     <Col md={11} className="mx-auto mt-5">
       <div>
         <h2 className="text-light mb-4">{title}</h2>
-
-        <Slider {...settings}>
-          {songs.map((song) => {
-            return <SongCard key={song.id} song={song} />;
-          })}
-        </Slider>
+        {!isLoading ? (
+          <Slider {...settings}>
+            {songs.map((song) => {
+              return <SongCard key={song.id} song={song} />;
+            })}
+          </Slider>
+        ) : (
+          <div className="d-flex justify-content-center">
+            <Spinner animation="grow" variant="light" role="status"></Spinner>
+          </div>
+        )}
       </div>
     </Col>
   );

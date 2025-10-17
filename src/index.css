@@ -11,7 +11,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  width: 230px;
+  width: 260px;
   flex-flow: column nowrap;
   align-items: flex-start;
   background-color: black;
@@ -174,4 +174,16 @@ ul {
 
 .margin-bot {
   margin-bottom: 10rem;
+}
+
+.fixed-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 260px;
+  padding: 20px;
+  background-color: #0f151d;
+  z-index: 1100;
+  overflow-y: auto;
 }
